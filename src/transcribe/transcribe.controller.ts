@@ -1,6 +1,7 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { TranscribeService } from './transcribe.service';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { PostTranscribeBody } from './dto/post-transcribe.body';
 
 @Controller('transcribe')
 export class TranscribeController {
@@ -11,7 +12,7 @@ export class TranscribeController {
 	@Post()
 	@UseGuards(AuthGuard)
 	async transcribe(
-		@Body() body: { audio: string; language: string; },
+		@Body() body: PostTranscribeBody,
 	): Promise<{
 		transcript: string;
 	}> {
